@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    
+    <link rel="icon" type="image/x-icon" href="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <link rel="icon" type="image/png" sizes="32x32" href="">
+    <link rel="apple-touch-icon" sizes="180x180" href="">
+    <link rel="icon" type="image/png" sizes="192x192" href="">
+    <link rel="icon" type="image/png" sizes="512x512" href="">
+
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    
+</head>
+<body onload="startPokedex()">
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="./img/logo.jpg" alt="Pokédex Logo"></a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search Pokédex (min. 3 characters)" minlength="3">
+            <button class="search-button" disabled>Search</button>
+        </div>
+        </div>
+        <div >
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="pokedex-grid" id="pokedexGrid">
+            <!-- Pokedex cards here -->
+        </div>
+        
+        <div class="load-more-container">
+            <button class="load-more-button" id="loadMoreButton">Load More Pokédex</button>
+        </div>
+
+        <div class="overlay hidden" id="overlay">
+            <div class="overlay-content">
+                <button class="close-button" id="closeButton">×</button>
+                <div class="pokedex-detail" id="pokedexDetail">
+                    <!-- Pokedex details here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <p>&copy; 2025 Pokédex. Alle Rechte vorbehalten.</p>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "figtree", Arial, sans-serif;
+  background: rgb(22, 190, 196);
+  color: rgb(5, 5, 5);
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #bb622a;
+    box-shadow: var(--shadow);
+    padding: 1.5rem 3.3rem 1.5rem 2.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo img {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.logo img:hover {
+    filter: brightness(1.1) saturate(1.2);
+    box-shadow: 0 0 10px rgba(197, 213, 206, 0.5);
+    transform: scale(1.02);
+    border-color: #dee8e3;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ebeaeff3;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #84c3aa;
+}
+
+main {
+  flex: 1; 
+  padding: 16px;
+  min-height: 70vh;
+}
+
+.privacy-container {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.privacy-title {
+  text-align: center;
+  color: #570505;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.privacy-section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  color: #570505;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-number {
+  background: #570505;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.privacy-section p {
+  margin-bottom: 15px;
+}
+
+.contact-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.contact-item {
+  margin-bottom: 8px;
+}
+
+.email-link {
+  color: #570505;
+  text-decoration: none;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+.highlight-box {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.rights-list {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.rights-list li {
+  margin-bottom: 8px;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 32px;
+  background: #f8f9fa;
+  gap: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: auto; 
+}
+
+.page-footer a {
+  text-decoration: none;
+  color: #570505;
+}
+
+.page-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
+  
+  .privacy-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .privacy-title {
+    font-size: 1.7rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  .page-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 10px 15px;
+  }
+  
+  main {
+    padding: 10px;
+  }
+  
+  .privacy-container {
+    padding: 15px;
+  }
+  
+  .privacy-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .contact-item strong {
+    display: block;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 465px) {
+  .page-footer p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+  }
+  
+  .page-footer p::before {
+    content: "© 2025 Fotogram Galerie.";
+  }
+  
+  .page-footer p::after {
+    content: "Alle Rechte vorbehalten.";
+  }
+  
+  .page-footer p {
+    font-size: 0;
+  }
+  
+  .page-footer p::before,
+  .page-footer p::after {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 360px) {
+  .impressum-container {
+    padding: 15px 10px;
+  }
+  
+  .impressum-title {
+    font-size: 1.4rem;
+  }
+  
+  .impressum-section {
+    padding: 12px;
+  }
+
+  .main h1 {
+    font-size: 1rem;
+  }
+
+  .privacy-title {
+    font-size: 1.4rem;
+  }
+  
+  .contact-item strong {
+    min-width: 70px;
+    font-size: 0.9rem;
+  }
+}

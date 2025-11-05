@@ -20,7 +20,7 @@ async function getFirstPokedex() {
     try {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
         const data = await response.json();
-        
+        // console.log(data.results);
         const pokemonWithDetails = [];
         
         for (let i = 0; i < data.results.length; i++) {
@@ -28,7 +28,7 @@ async function getFirstPokedex() {
             
             const detailResponse = await fetch(pokemon.url);
             const detailData = await detailResponse.json();
-                        
+            
             pokemonWithDetails.push(detailData);
         }
         
@@ -66,7 +66,6 @@ function showPokedexCards(pokedexList) {
 
     pokedexGrid.innerHTML = '';
     
-    // Krijo një kartë për çdo Pokémon duke përdorur for loop
     for (let i = 0; i < pokedexList.length; i++) {
         const pokedex = pokedexList[i];
         
@@ -81,7 +80,7 @@ function showPokedexCards(pokedexList) {
             <p>#ID: ${pokedex.id}</p>
             <img src="${imageUrl}" alt="${pokedex.name}" width="96" height="96">
             <h3>${pokedex.name}</h3>
-            <button onclick="showPokemonDetails(${pokedex.id})">More Details</button>
+            <button onclick="showPokedexDetails(${pokedex.id})">More Details</button>
         `;
         
         // Shto kartën në grid
@@ -91,15 +90,40 @@ function showPokedexCards(pokedexList) {
 }
 
 
+// async function showPokedexDetails(pokedexId) {
+
+//     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokedexId}`);
+//     const pokedex = await response.json();
+
+//     currentPokedexId = pokedexId;
+
+//     pokedexDetail.innerHTML = /*Html*/`
+    
+    
+//     `
+//     let typesHTML = '';
+//     for (let i = 0; i < pokedex.types.length; i++) {
+//         typesHTML += ``;
+        
+//     }
+//     console.log("ID:", pokedexId);
+    
+    
+// }
+
+
+
+
 // Funksionet e tjera
-function getMorePokedex() {
-    console.log("Funksioni për më shumë Pokémon");
-}
+// function getMorePokedex() {
 
-function hideDetails() {
-    console.log("Funksioni për mbylljen e dritares");
-}
+//     console.log("Funksioni për më shumë Pokémon");
+// }
 
-function searchPokedex() {
-    console.log("Funksioni: searchPokemon() - Do të kërkojë Pokémon");
-}
+// function hideDetails() {
+//     console.log("Funksioni për mbylljen e dritares");
+// }
+
+// function searchPokedex() {
+//     console.log("Funksioni: searchPokemon() - Do të kërkojë Pokémon");
+// }

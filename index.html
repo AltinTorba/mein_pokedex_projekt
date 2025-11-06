@@ -14,9 +14,11 @@
 
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
-    
+    <script defer src="./scripts/typeColors.js"></script>
+    <!-- <script defer src="./scripts/templates.js"></script> -->
+
 </head>
-<body onload="startPokedex()">
+<body onload="init()">
     <header>
         <div class="logo">
             <a href="index.html"><img src="./img/logo.jpg" alt="Pokédex Logo"></a>
@@ -39,32 +41,23 @@
     </header>
 
     <main>
-        <div class="pokedex-grid" id="pokedexGrid">
-            <!-- Pokedex cards here -->
+        <div class="pokemon-grid" id="pokemonGrid">
+            <!-- Pokemon cards here -->
         </div>
         
         <div class="load-more-container">
             <button class="load-more-button" id="loadMoreButton">Load More Pokédex</button>
         </div>
+    </main>
 
         <div class="overlay hidden" id="overlay">
             <div class="overlay-content">
                 <button class="close-button" id="closeButton">×</button>
-                <div class="pokedex-detail" id="pokedexDetail">
-                    <!-- Pokedex details here -->
-                    <div class="pokedex-detail">
-                        <!-- <img src="pokedex.sprites.front_default" alt="pokedex.name" class="detail-image"> -->
-                        <h2 class="detail-name"></h2>
-                        <div class="detai-types">
-                            <!-- let typesHTML = ''; -->
-                            
-                        </div>
-
-                    </div>
+                <div class="pokemon-detail" id="pokemonDetail">
+                    <!-- Pokemon details here -->
                 </div>
             </div>
         </div>
-    </main>
 
     <footer class="page-footer">
         <p>&copy; 2025 Pokédex. Alle Rechte vorbehalten.</p>

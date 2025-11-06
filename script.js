@@ -1,129 +1,79 @@
 let currentOffset = 0;
-// const limit = 20;
-let allPokedex = [];
-let filteredPokedex = [];
-let currentPokedexId = null;
-let isSearching = false;
+const limit = 20;
+let allPokemon = [];
+let filteredPokemon = [];
+let currentPokemonId = null;
 
-
-const pokedexGrid = document.getElementById("pokedexGrid");
+const pokemonGrid = document.getElementById("pokemonGrid");
 const loadMoreButton = document.getElementById("loadMoreButton");
 const overlay = document.getElementById("overlay");
 const closeButton = document.getElementById("closeButton");
-const pokedexDetail = document.getElementById("pokedexDetail");
+const pokemonDetail = document.getElementById("pokemonDetail");
 const searchInput = document.querySelector(".search-input");
-const searchButton = document.querySelector(".search-button"); 
+const searchButton = document.querySelector(".search-button");
 
 
-async function getFirstPokedex() {
-    
+function init() {
+    fetchPokemonData(currentOffset, limit).then(data => {
+        allPokemon = data;
+        filteredPokemon = data;
+        displayPokemonCards(data);
+    });
+}
+
+async function fetchPokemonData(offset, limit) {
     try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
         const data = await response.json();
-        // console.log(data.results);
-        const pokemonWithDetails = [];
-        
+
+        const pokemonDetails = [];
+
         for (let i = 0; i < data.results.length; i++) {
             const pokemon = data.results[i];
-            
-            const detailResponse = await fetch(pokemon.url);
-            const detailData = await detailResponse.json();
-            
-            pokemonWithDetails.push(detailData);
+            const pokemonResponse = await fetch(pokemon.url);
+            const pokemonData = await pokemonResponse.json();
+            pokemonDetails.push(pokemonData);
         }
-        
-        allPokedex = pokemonWithDetails;
-        showPokedexCards(allPokedex);
-        
+
+        return pokemonDetails;
+
     } catch (error) {
         console.error("❌:", error);
+        return []; 
     }
 }
 
-
-
-function startPokedex() {
-
-    getFirstPokedex();
-
+function createPokemonCard(pokemon) {
+    const card = document.createElement('div');
+    card.className = 'pokemon-card';
+    card.dataset.id = pokemon.id;
     
-    // loadMoreButton.onclick = getMorePokedex;
-    // closeButton.onclick = hideDetails;
-    // searchButton.onclick = searchPokedex;
+    const primaryType = pokemon.types[0].type.name;
+    const backgroundColor = typeColors[primaryType] || '#A8A878';
+    card.style.backgroundColor = backgroundColor;
     
-    // Kërko me Enter
-    // searchInput.onkeypress = function(event) {
-    //     if (event.key === "Enter") {
-    //         searchPokedex();
-    //     }
-    // };
+    const imageUrl = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
     
-    // Thirr funksionin për të marrë Pokémon të parë    
+    card.innerHTML = `
+        <img src="${imageUrl}" alt="${pokemon.name}" class="pokemon-image">
+        <h3 class="pokemon-name">${pokemon.name}</h3>
+        <div class="pokemon-types">
+            ${pokemon.types.map(type => 
+                `<span class="type-badge" style="background-color: ${typeColors[type.type.name]}">${type.type.name}</span>`
+            ).join('')}
+        </div>
+        <div class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</div>
+    `;
+    
+    card.addEventListener('click', () => openPokemonDetail(pokemon));
+    
+    return card;
 }
 
-
-function showPokedexCards(pokedexList) {    
-
-    pokedexGrid.innerHTML = '';
-    
-    for (let i = 0; i < pokedexList.length; i++) {
-        const pokedex = pokedexList[i];
-        
-        // elementin për kartën
-        const card = document.createElement('div');
-        card.className = 'pokedex-card';
-        
-        // Përdor sprite-in e fotos nëse ekziston
-        const imageUrl = pokedex.sprites.front_default || 'https://via.placeholder.com/96x96?text=No+Image';
-        
-        card.innerHTML = `
-            <p>#ID: ${pokedex.id}</p>
-            <img src="${imageUrl}" alt="${pokedex.name}" width="96" height="96">
-            <h3>${pokedex.name}</h3>
-            <button onclick="showPokedexDetails(${pokedex.id})">More Details</button>
-        `;
-        
-        // Shto kartën në grid
-        pokedexGrid.appendChild(card);
-    }
-
+function displayPokemonCards(pokemonList) {
+    pokemonList.forEach(pokemon => {
+        const card = createPokemonCard(pokemon);
+        pokemonGrid.appendChild(card);
+    });
 }
 
-
-// async function showPokedexDetails(pokedexId) {
-
-//     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokedexId}`);
-//     const pokedex = await response.json();
-
-//     currentPokedexId = pokedexId;
-
-//     pokedexDetail.innerHTML = /*Html*/`
-    
-    
-//     `
-//     let typesHTML = '';
-//     for (let i = 0; i < pokedex.types.length; i++) {
-//         typesHTML += ``;
-        
-//     }
-//     console.log("ID:", pokedexId);
-    
-    
-// }
-
-
-
-
-// Funksionet e tjera
-// function getMorePokedex() {
-
-//     console.log("Funksioni për më shumë Pokémon");
-// }
-
-// function hideDetails() {
-//     console.log("Funksioni për mbylljen e dritares");
-// }
-
-// function searchPokedex() {
-//     console.log("Funksioni: searchPokemon() - Do të kërkojë Pokémon");
-// }

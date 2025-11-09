@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <script defer src="./scripts/typeColors.js"></script>
-    <!-- <script defer src="./scripts/templates.js"></script> -->
+    <script defer src="./scripts/templates.js"></script>
 
 </head>
 <body onload="init()">
@@ -29,7 +29,6 @@
         </div>
         </div>
         <div >
-            <!-- Navigation -->
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -42,22 +41,20 @@
 
     <main>
         <div class="pokemon-grid" id="pokemonGrid">
-            <!-- Pokemon cards here -->
         </div>
         
         <div class="load-more-container">
-            <button class="load-more-button" id="loadMoreButton">Load More Pokédex</button>
+            <button class="load-more-button" id="loadMoreButton">Load More Pokemon</button>
         </div>
     </main>
 
-        <div class="overlay hidden" id="overlay">
-            <div class="overlay-content">
-                <button class="close-button" id="closeButton">×</button>
-                <div class="pokemon-detail" id="pokemonDetail">
-                    <!-- Pokemon details here -->
-                </div>
+    <dialog class="pokemon-dialog" id="pokemonDialog">
+        <div class="dialog-content">
+            <div class="pokemon-detail" id="pokemonDetail">
+                <button class="dialog-close" id="dialogClose">×</button>
             </div>
         </div>
+    </dialog>
 
     <footer class="page-footer">
         <p>&copy; 2025 Pokédex. Alle Rechte vorbehalten.</p>

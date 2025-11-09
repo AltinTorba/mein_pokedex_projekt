@@ -1,34 +1,48 @@
-// const pokemonCardTemplate = `
-//         <img src="${imageUrl}" alt="${pokemon.name}" class="pokemon-image">
-//         <h3 class="pokemon-name">${pokemon.name}</h3>
-//         <div class="pokemon-types">
-//             ${pokemon.types.map(type => 
-//                 `<span class="type-badge" style="background-color: ${typeColors[type.type.name]}">${type.type.name}</span>`
-//             ).join('')}
-//         </div>
-//         <div class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</div>
-//     `;
+function getPokemonCardTemplate(pokemon, imageUrl) {
+    return `
+        <img src="${imageUrl}" alt="${pokemon.name}" class="pokemon-image">
+        <h3 class="pokemon-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
+        <div class="pokemon-types">
+            ${pokemon.types.map(type => 
+                `<span class="type-badge" style="background-color: ${typeColors[type.type.name]}">
+                    ${type.type.name}
+                </span>`
+            ).join('')}
+        </div>
+        <div class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</div>
+    `;
+}
 
 
-// const pokemonCardTemplate = `
-//     <img src="${imageUrl}" alt="${pokemon.name}" class="pokemon-image">
-//     <h3 class="pokemon-name">${pokemon.name}</h3>
-//     <div class="pokemon-types">
-//         ${getTypesHTML(pokemon.types)}
-//     </div>
-//     <div class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</div>
-// `;
-
-// function getTypesHTML(types) {
-//     let typesHTML = '';
-    
-//     for (let i = 0; i < types.length; i++) {
-//         const type = types[i];
-//         const typeName = type.type.name;
-//         const typeColor = typeColors[typeName] || '#A8A878';
-        
-//         typesHTML += `<span class="type-badge" style="background-color: ${typeColor}">${typeName}</span>`;
-//     }
-    
-//     return typesHTML;
-// }
+function getPokemonDetailTemplate(pokemon, backgroundColor, imageUrl, currentPokemonIndex, allPokemon) {
+    return `
+    <div class="pokemon-detail-card" style="background-color: ${backgroundColor}">
+        <button class="close-detail-button">×</button>
+        <img src="${imageUrl}" alt="${pokemon.name}" class="detail-image">
+        <h2 class="detail-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
+        <div class="detail-types">
+            ${pokemon.types.map(type => 
+                `<span class="type-badge" style="background-color: ${typeColors[type.type.name]}">
+                    ${type.type.name}
+                </span>`
+            ).join('')}
+        </div>
+        <div class="detail-stats">
+            ${pokemon.stats.map(stat => 
+                `<div class="stat-item">
+                    <span class="stat-name">${stat.stat.name}</span>
+                    <span class="stat-value">${stat.base_stat}</span>
+                </div>`
+            ).join('')}
+        </div>
+        <div class="navigation-buttons">
+            <button class="nav-button" id="prevButton" ${currentPokemonIndex === 0 ? 'disabled' : ''}>
+                ← Previous
+            </button>
+            <button class="nav-button" id="nextButton" ${currentPokemonIndex === allPokemon.length - 1 ? 'disabled' : ''}>
+                Next →
+            </button>
+        </div>
+    </div>
+    `;
+}

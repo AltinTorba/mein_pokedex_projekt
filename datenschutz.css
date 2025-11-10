@@ -201,6 +201,10 @@ main {
     padding: 10px 15px;
   }
   
+  header {
+    flex-direction: column;
+  }
+
   main {
     padding: 10px;
   }
@@ -242,7 +246,7 @@ main {
   }
   
   .page-footer p::before {
-    content: "© 2025 Fotogram Galerie.";
+    content: "© 2025 Pokédex.";
   }
   
   .page-footer p::after {

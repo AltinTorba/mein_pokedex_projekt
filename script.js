@@ -71,22 +71,16 @@ function displayPokemonCards(pokemonList) {
 async function loadMorePokemon() {
     loadMoreButton.disabled = true;
     loadMoreButton.textContent = 'Loading...';
-    
     const loadingElement = document.createElement('div');
     loadingElement.className = 'loading';
     loadingElement.innerHTML = '<div class="spinner"></div>';
     pokemonGrid.appendChild(loadingElement);
-    
     try {
         const newPokemon = await fetchPokemonData(currentOffset, limit);
         allPokemon = [...allPokemon, ...newPokemon];
         displayPokemonCards(newPokemon);
-        
         currentOffset += limit;
-        
-        if (newPokemon.length < limit) {
-            loadMoreButton.style.display = 'none';
-        }
+        if (newPokemon.length < limit) loadMoreButton.style.display = 'none';
     } catch (error) {
         console.error('Error loading more Pokémon:', error);
     } finally {
@@ -98,34 +92,18 @@ async function loadMorePokemon() {
 
 function openPokemonDetail(pokemon) {
     currentPokemonIndex = allPokemon.findIndex(p => p.id === pokemon.id);
-    
     const primaryType = pokemon.types[0].type.name;
     const backgroundColor = typeColors[primaryType] || '#A8A878';
-    
-    const imageUrl = pokemon.sprites.other['official-artwork'].front_default || 
-                    pokemon.sprites.front_default;
-    
+    const imageUrl = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
     pokemonDetail.innerHTML = getPokemonDetailTemplate(pokemon, backgroundColor, imageUrl, currentPokemonIndex, allPokemon);
-    
-    currentPokemonIndex = allPokemon.findIndex(p => p.id === pokemon.id);
     
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
-    
     prevButton.disabled = currentPokemonIndex === 0;
-    nextButton.disabled = currentPokemonIndex=== allPokemon.length - 1;
+    nextButton.disabled = currentPokemonIndex === allPokemon.length - 1;
     
-    prevButton.addEventListener('click', () => {
-        if (currentPokemonIndex > 0) {
-            openPokemonDetail(allPokemon[currentPokemonIndex - 1]);
-        }
-    });
-    
-    nextButton.addEventListener('click', () => {
-        if (currentPokemonIndex < allPokemon.length - 1) {
-            openPokemonDetail(allPokemon[currentPokemonIndex + 1]);
-        }
-    });
+    prevButton.onclick = () => currentPokemonIndex > 0 && openPokemonDetail(allPokemon[currentPokemonIndex - 1]);
+    nextButton.onclick = () => currentPokemonIndex < allPokemon.length - 1 && openPokemonDetail(allPokemon[currentPokemonIndex + 1]);
     
     pokemonDialog.showModal();
 }

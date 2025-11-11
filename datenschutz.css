@@ -182,7 +182,7 @@ main {
   justify-content: center;
   align-items: center;
   padding: 20px 32px;
-  background: #f8f9fa;
+  background: #640808;
   gap: 20px;
   border-top: 1px solid #ddd;
   margin-top: auto;
@@ -190,7 +190,7 @@ main {
 
 .page-footer a {
   text-decoration: none;
-  color: #570505;
+  color: #e4e0e0;
   font-weight: bold;
 }
 
@@ -201,6 +201,7 @@ main {
 .page-footer p {
   margin: 0;
   text-align: center;
+  color: #e4e0e0;
 }
 
 @media (max-width: 1024px) {

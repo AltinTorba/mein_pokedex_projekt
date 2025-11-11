@@ -14,10 +14,19 @@ const searchButton = document.querySelector(".search-button");
 
 
 async function init() {
-    const data = await fetchPokemonData(0, 20);
-    allPokemon = data;
-    filteredPokemon = data;
-    displayPokemonCards(data);
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.classList.remove('hidden');
+    
+    try {
+        const data = await fetchPokemonData(0, 20);
+        allPokemon = data;
+        filteredPokemon = data;
+        displayPokemonCards(data);
+    } catch (error) {
+        console.error("❌:", error);
+    } finally {
+        loadingOverlay.classList.add('hidden');
+    }
 }
 
 async function fetchPokemonData(offset, limit) {
@@ -69,6 +78,7 @@ async function loadMorePokemon() {
     } catch (error) {
         console.error('Error loading more Pokémon:', error);
     } finally {
+        loadingOverlay.classList.add('hidden');
         loadMoreButton.disabled = false;
         loadMoreButton.textContent = 'Load More Pokémon';
     }
